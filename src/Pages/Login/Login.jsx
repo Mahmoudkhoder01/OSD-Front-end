@@ -24,22 +24,24 @@ const Login = () => {
         <img src={loginImage} alt="login-img" className={classes.loginImage} />
       </div>
       <div className={classes.loginForm}>
-        <h1 className={classes.title}>Time To Work!</h1>
-        <Input
-          type="text"
-          label="Email"
-          name="email"
-          value={data.email}
-          onChange={handleChange}
-        />
-        <Input
-          type="password"
-          label="Password"
-          name="password"
-          value={data.password}
-          onChange={handleChange}
-        />
-        <Button text={"Sign In"} />
+        <div style={{width: "50%"}}>
+          <h1 className={classes.title}>Time To Work!</h1>
+          <Input
+            type="text"
+            label="Email"
+            name="email"
+            value={data.email}
+            onChange={handleChange}
+          />
+          <Input
+            type="password"
+            label="Password"
+            name="password"
+            value={data.password}
+            onChange={handleChange}
+          />
+          <Button text={"Sign In"} />
+        </div>
       </div>
     </div>
   );
