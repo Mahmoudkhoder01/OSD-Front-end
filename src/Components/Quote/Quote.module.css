@@ -2,7 +2,7 @@
 
 .quoteWrapper {
   background: var(--gradient);
-  height: 50px;
+  height: 70px;
   padding: 10px 30px;
   display: flex;
   justify-content: space-between;
@@ -17,4 +17,5 @@
 
 .quoteWrapper:hover .closeIcon {
   opacity: 1;
+  cursor: pointer;
 }
