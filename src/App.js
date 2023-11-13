@@ -1,4 +1,4 @@
-import { Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./Pages/Login/Login";
 import Home from "./Pages/Home/Home";
@@ -6,12 +6,10 @@ import Home from "./Pages/Home/Home";
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/login" element={Login} />
-          <Route path="/" element={Home} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 }
