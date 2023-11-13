@@ -8,7 +8,7 @@ const Login = () => {
         <img src={loginImage} alt="login-img" className={classes.loginImage} />
       </div>
       <div className={classes.loginForm}>
-        <p>hhhhhhhh</p>
+        <h1 className={classes.title}>Time To Work!</h1>
       </div>
     </div>
   );
