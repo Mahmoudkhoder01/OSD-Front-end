@@ -5,8 +5,26 @@ import TodoTitles from "../../Components/TodosTItles/TodoTitles";
 import classes from "./Home.module.css";
 
 const Home = () => {
-  const [toDoData, setToDoData] = useState([{ title: "Done" }]);
-  const [doingData, setDoingData] = useState([]);
+  const [toDoData, setToDoData] = useState([
+    {
+      title: "Prepare the assay",
+      category: "Email",
+      dueDate: "2023-01-14",
+      estimate: "8 hours",
+      importance: "High",
+    },
+  ]);
+
+  const [doingData, setDoingData] = useState([
+    {
+      title: "Prepare the dddd",
+      category: "Email",
+      dueDate: "2023-01-14",
+      estimate: "8 hours",
+      importance: "High",
+    },
+  ]);
+
   const [doneData, setDoneData] = useState([]);
 
   return (
@@ -25,6 +43,7 @@ const Home = () => {
             data={doingData}
             setData={setDoingData}
           />
+          
           <TodoTitles
             titleStatus="Done"
             data={doneData}

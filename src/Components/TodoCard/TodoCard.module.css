@@ -16,6 +16,13 @@
   font-size: large;
 }
 
+.inputContainer {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .todoInput,
 .detailsInput {
   background-color: #212529;
@@ -26,10 +33,16 @@
 
 .labelTodo {
   color: #51585f;
+  width: 80px; /* Fixed width for labels */
 }
 
 .inputDetails {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  margin-bottom: 8px;
   gap: 35px;
+}
+
+.value {
+  color: white;
 }
