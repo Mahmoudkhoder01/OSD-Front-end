@@ -1,12 +1,18 @@
 import classes from "./input.module.css";
 
-const input = ({ label, type, value, onChange }) => {
+const Input = ({ label, type, value, name, onChange }) => {
   return (
-    <>
-      <label>{label}</label>
-      <input type={type} value={value} onChange={onChange} />
-    </>
+    <div className={classes.inputContainer}>
+      <label className={classes.label}>{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        className={classes.input}
+        name={name}
+      />
+    </div>
   );
 };
 
-export default input;
+export default Input;

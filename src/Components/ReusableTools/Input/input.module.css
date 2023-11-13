@@ -1,0 +1,21 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  margin: 15px 0;
+}
+
+.label {
+  align-self: flex-start;
+  color: white;
+}
+
+.input {
+  background-color: #222222;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  padding: 10px 10px;
+  color: white;
+}
