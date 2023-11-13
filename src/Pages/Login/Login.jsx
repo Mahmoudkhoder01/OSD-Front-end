@@ -3,13 +3,13 @@ import loginImage from "../../Images/login-image.png";
 
 const Login = () => {
   return (
-    <div>
-      {/* <div>
-        <img src={loginImage} alt="login-img" />
+    <div className={classes.loginWrapper}>
+      <div className={classes.loginImageWrapper}>
+        <img src={loginImage} alt="login-img" className={classes.loginImage} />
       </div>
-      <div> */}
-      <p>hhhhhhhh</p>
-      {/* </div> */}
+      <div className={classes.loginForm}>
+        <p>hhhhhhhh</p>
+      </div>
     </div>
   );
 };
