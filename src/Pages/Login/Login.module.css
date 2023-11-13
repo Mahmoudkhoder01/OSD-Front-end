@@ -17,6 +17,7 @@
   flex: 1;
   background-color: #604482;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -25,5 +26,4 @@
   font-size: 4rem;
   font-weight: 100;
   color: white;
-  margin-bottom: 20px;
 }
