@@ -4,7 +4,12 @@ import loginImage from "../../Images/login-image.png";
 const Login = () => {
   return (
     <div>
-      <img src={loginImage} alt="login-img" />
+      {/* <div>
+        <img src={loginImage} alt="login-img" />
+      </div>
+      <div> */}
+      <p>hhhhhhhh</p>
+      {/* </div> */}
     </div>
   );
 };
