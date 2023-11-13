@@ -1,8 +1,8 @@
+import Nav from "../../Components/Nav/Nav";
 import classes from "./Home.module.css";
 
 const Home = () => {
-  return <div>Home</div>;
+  return <Nav />;
 };
 
 export default Home;
-  
