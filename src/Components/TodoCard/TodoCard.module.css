@@ -1,0 +1,35 @@
+.cardWrapper {
+  padding: 10px 10px;
+}
+
+.cardWrapper,
+.status {
+  background-color: #212529;
+  border-radius: 8px;
+}
+
+.cardWrapper h4 {
+  color: white;
+}
+
+.todoInput {
+  font-size: large;
+}
+
+.todoInput,
+.detailsInput {
+  background-color: #212529;
+  color: white;
+  border: 0;
+  outline: 0;
+}
+
+.labelTodo {
+  color: #51585f;
+}
+
+.inputDetails {
+  display: flex;
+  align-items: baseline;
+  gap: 35px;
+}
