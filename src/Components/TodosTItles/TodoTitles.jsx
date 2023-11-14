@@ -4,7 +4,7 @@ import { BiCheckCircle } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import TodoCard from "../TodoCard/TodoCard";
 
-const TodoTitles = ({ titleStatus, data, onDrop }) => {
+const TodoTitles = ({ titleStatus, data, onDrop, isEdit, setIsEdit }) => {
   const statusIcons = {
     "To Do": <GiHamburgerMenu size={30} color="#8E7AD2" />,
     Doing: <LuListTodo size={30} color="#FE913E" />,
@@ -55,6 +55,9 @@ const TodoTitles = ({ titleStatus, data, onDrop }) => {
           dueDateValue={todo.dueDate}
           estimateValue={todo.estimate}
           importanceValue={todo.importance}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          cardIndex={index}
         />
       ))}
     </div>

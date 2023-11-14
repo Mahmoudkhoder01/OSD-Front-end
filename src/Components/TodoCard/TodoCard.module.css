@@ -63,3 +63,9 @@
 .value {
   color: white;
 }
+
+.editMode {
+  display: flex;
+  gap: 15px;
+  /* transition: opacity 0.5s ease-in-out; */
+}

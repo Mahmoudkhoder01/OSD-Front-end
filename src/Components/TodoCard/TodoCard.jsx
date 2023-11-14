@@ -1,5 +1,7 @@
 import classes from "./TodoCard.module.css";
 import { FiEdit2 } from "react-icons/fi";
+import { FaSave } from "react-icons/fa";
+import { useState } from "react";
 
 const TodoCard = ({
   todoTitle,
@@ -7,10 +9,11 @@ const TodoCard = ({
   dueDateValue,
   estimateValue,
   importanceValue,
+  isEdit,
+  setIsEdit,
+  cardIndex,
 }) => {
   const getImportanceColor = (importportance) => {
-    // Define your color logic here based on the importanceValue
-    // For example, you can assign specific colors to different importance levels
     if (importportance === "High") {
       return "#DC3545";
     } else if (importportance === "Medium") {
@@ -30,6 +33,18 @@ const TodoCard = ({
     borderRadius: "5px",
   };
 
+  const [saveClicked, setSaveClicked] = useState(null);
+
+  const handleEditClick = () => {
+    setIsEdit(!isEdit);
+    setSaveClicked(cardIndex);
+  };
+
+  const handleSaveClick = () => {
+    setIsEdit(false);
+    setSaveClicked(null);
+  };
+
   return (
     <div className={classes.cardWrapper} draggable>
       <div className={classes.titleAndIcon}>
@@ -39,8 +54,11 @@ const TodoCard = ({
           className={classes.todoInput}
           readOnly
         />
-        <div>
-          <FiEdit2 color="white" size={20} />
+        <div className={classes.editMode}>
+          <FiEdit2 color="white" size={20} onClick={handleEditClick} />
+          {isEdit && cardIndex === saveClicked && (
+            <FaSave color="white" size={20} onClick={handleSaveClick} />
+          )}
         </div>
       </div>
       <div className={classes.inputContainer}>

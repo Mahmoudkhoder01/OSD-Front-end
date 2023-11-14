@@ -5,6 +5,16 @@ import TodoTitles from "../../Components/TodosTItles/TodoTitles";
 import classes from "./Home.module.css";
 
 const Home = () => {
+  const [data, setData] = useState({
+    title: "",
+    category: "",
+    dueDate: "",
+    estimate: "",
+    importance: "",
+  });
+
+  const [isEdit, setIsEdit] = useState(false);
+
   const [toDoData, setToDoData] = useState([
     {
       title: "Prepare the assay",
@@ -62,6 +72,8 @@ const Home = () => {
             data={toDoData}
             setData={setToDoData}
             onDrop={(draggedData) => handleDrop(draggedData, "To Do")}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
           />
 
           <TodoTitles
@@ -69,6 +81,8 @@ const Home = () => {
             data={doingData}
             setData={setDoingData}
             onDrop={(draggedData) => handleDrop(draggedData, "Doing")}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
           />
 
           <TodoTitles
@@ -76,6 +90,8 @@ const Home = () => {
             data={doneData}
             setData={setDoneData}
             onDrop={(draggedData) => handleDrop(draggedData, "Done")}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
           />
         </div>
       </div>
