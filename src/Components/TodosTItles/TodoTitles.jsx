@@ -4,7 +4,7 @@ import { BiCheckCircle } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import TodoCard from "../TodoCard/TodoCard";
 
-const TodoTitles = ({ titleStatus, data }) => {
+const TodoTitles = ({ titleStatus, data, onDrop }) => {
   const statusIcons = {
     "To Do": <GiHamburgerMenu size={30} color="#8E7AD2" />,
     Doing: <LuListTodo size={30} color="#FE913E" />,
@@ -13,8 +13,33 @@ const TodoTitles = ({ titleStatus, data }) => {
 
   const statusIcon = statusIcons[titleStatus];
 
+  const handleDrop = (event) => {
+    event.preventDefault();
+
+    // Get the dragged data from the event
+    const draggedDataString = event.dataTransfer.getData("text/plain");
+
+    // Check if the dragged data string is not empty
+    if (draggedDataString) {
+      const draggedData = JSON.parse(draggedDataString);
+
+      console.log("dropped");
+
+      // Call the onDrop function with the dragged data and the title status
+      onDrop(draggedData, titleStatus);
+    }
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <div className={classes.todoWrapper}>
+    <div
+      className={classes.todoWrapper}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+    >
       <div className={classes.status}>
         {statusIcon}
         {titleStatus}

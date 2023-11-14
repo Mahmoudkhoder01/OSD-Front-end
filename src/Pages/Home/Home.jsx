@@ -13,6 +13,20 @@ const Home = () => {
       estimate: "8 hours",
       importance: "High",
     },
+    {
+      title: "Prepare the assay",
+      category: "Email",
+      dueDate: "2023-01-14",
+      estimate: "8 hours",
+      importance: "High",
+    },
+    {
+      title: "Prepare the assay",
+      category: "Email",
+      dueDate: "2023-01-14",
+      estimate: "8 hours",
+      importance: "High",
+    },
   ]);
 
   const [doingData, setDoingData] = useState([
@@ -27,6 +41,16 @@ const Home = () => {
 
   const [doneData, setDoneData] = useState([]);
 
+  const handleDrop = (draggedData, targetStatus) => {
+    if (targetStatus === "To Do") {
+      setToDoData((prevData) => [...prevData, draggedData]);
+    } else if (targetStatus === "Doing") {
+      setDoingData((prevData) => [...prevData, draggedData]);
+    } else if (targetStatus === "Done") {
+      setDoneData((prevData) => [...prevData, draggedData]);
+    }
+  };
+
   return (
     <div className={classes.homePge}>
       <Nav />
@@ -37,17 +61,21 @@ const Home = () => {
             titleStatus="To Do"
             data={toDoData}
             setData={setToDoData}
+            onDrop={(draggedData) => handleDrop(draggedData, "To Do")}
           />
+
           <TodoTitles
             titleStatus="Doing"
             data={doingData}
             setData={setDoingData}
+            onDrop={(draggedData) => handleDrop(draggedData, "Doing")}
           />
-          
+
           <TodoTitles
             titleStatus="Done"
             data={doneData}
             setData={setDoneData}
+            onDrop={(draggedData) => handleDrop(draggedData, "Done")}
           />
         </div>
       </div>

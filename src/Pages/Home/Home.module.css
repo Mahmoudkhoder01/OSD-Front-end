@@ -1,6 +1,7 @@
 .homePge {
   background-color: #5b5e60;
-  height: 100vh;
+  min-height: 100vh;
+  padding-bottom: 40px;
 }
 
 .cardsWrapper {

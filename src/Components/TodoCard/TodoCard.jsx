@@ -17,7 +17,7 @@ const TodoCard = ({
     } else if (importportance === "Low") {
       return "#39AC95";
     } else {
-      return "transparent"; // Default color or handle other cases
+      return "transparent";
     }
   };
 
@@ -30,7 +30,7 @@ const TodoCard = ({
   };
 
   return (
-    <div className={classes.cardWrapper}>
+    <div className={classes.cardWrapper} draggable>
       <input
         type="text"
         value={todoTitle}
