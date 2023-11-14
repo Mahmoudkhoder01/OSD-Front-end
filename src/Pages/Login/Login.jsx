@@ -24,7 +24,7 @@ const Login = () => {
         <img src={loginImage} alt="login-img" className={classes.loginImage} />
       </div>
       <div className={classes.loginForm}>
-        <div style={{width: "50%"}}>
+        <div style={{ width: "50%" }}>
           <h1 className={classes.title}>Time To Work!</h1>
           <Input
             type="text"

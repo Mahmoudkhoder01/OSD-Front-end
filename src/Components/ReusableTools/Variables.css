@@ -1,0 +1,5 @@
+:root {
+  --primary: #322d57;
+  --secondary: #604482;
+  --gradient: linear-gradient(to top, var(--primary), var(--secondary));
+}
