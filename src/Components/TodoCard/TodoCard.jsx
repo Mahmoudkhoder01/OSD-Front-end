@@ -1,4 +1,5 @@
 import classes from "./TodoCard.module.css";
+import { FiEdit2 } from "react-icons/fi";
 
 const TodoCard = ({
   todoTitle,
@@ -31,12 +32,17 @@ const TodoCard = ({
 
   return (
     <div className={classes.cardWrapper} draggable>
-      <input
-        type="text"
-        value={todoTitle}
-        className={classes.todoInput}
-        readOnly
-      />
+      <div className={classes.titleAndIcon}>
+        <input
+          type="text"
+          value={todoTitle}
+          className={classes.todoInput}
+          readOnly
+        />
+        <div>
+          <FiEdit2 color="white" size={20} />
+        </div>
+      </div>
       <div className={classes.inputContainer}>
         <div className={classes.inputDetails}>
           <label className={classes.labelTodo}>Category</label>

@@ -1,5 +1,5 @@
 .cardWrapper {
-  padding: 10px 10px;
+  padding: 10px 20px 10px 10px;
   user-select: none;
 }
 
@@ -11,6 +11,22 @@
 
 .cardWrapper h4 {
   color: white;
+}
+
+.titleAndIcon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleAndIcon div {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.cardWrapper:hover .titleAndIcon div {
+  opacity: 1;
 }
 
 .todoInput {
