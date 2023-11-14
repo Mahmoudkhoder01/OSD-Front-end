@@ -5,14 +5,6 @@ import TodoTitles from "../../Components/TodosTItles/TodoTitles";
 import classes from "./Home.module.css";
 
 const Home = () => {
-  const [data, setData] = useState({
-    title: "",
-    category: "",
-    dueDate: "",
-    estimate: "",
-    importance: "",
-  });
-
   const [isEditToDo, setIsEditToDo] = useState(null);
   const [isEditDoing, setIsEditDoing] = useState(null);
   const [isEditDone, setIsEditDone] = useState(null);
@@ -93,8 +85,8 @@ const Home = () => {
         <div style={{ display: "flex" }}>
           <TodoTitles
             titleStatus="To Do"
-            data={toDoData}
-            setData={setToDoData}
+            details={toDoData}
+            setDetailsData={setToDoData}
             onDrop={(draggedData) => handleDrop(draggedData, "To Do")}
             isEdit={isEditToDo}
             setIsEdit={(cardIndex) => setIsEditToDo(cardIndex)}
@@ -102,8 +94,8 @@ const Home = () => {
 
           <TodoTitles
             titleStatus="Doing"
-            data={doingData}
-            setData={setDoingData}
+            details={doingData}
+            setDetailsData={setDoingData}
             onDrop={(draggedData) => handleDrop(draggedData, "Doing")}
             isEdit={isEditDoing}
             setIsEdit={(cardIndex) => setIsEditDoing(cardIndex)}
@@ -111,8 +103,8 @@ const Home = () => {
 
           <TodoTitles
             titleStatus="Done"
-            data={doneData}
-            setData={setDoneData}
+            details={doneData}
+            setDetailsData={setDoneData}
             onDrop={(draggedData) => handleDrop(draggedData, "Done")}
             isEdit={isEditDone}
             setIsEdit={(cardIndex) => setIsEditDone(cardIndex)}

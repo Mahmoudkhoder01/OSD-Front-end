@@ -19,18 +19,24 @@
   justify-content: space-between;
 }
 
-.titleAndIcon div {
+.titleAndIcon .editMode {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
   cursor: pointer;
 }
 
-.cardWrapper:hover .titleAndIcon div {
+.cardWrapper:hover .titleAndIcon .editMode {
   opacity: 1;
 }
 
+.todoTitle{
+  color: white;
+  font-size: 1.2rem;
+}
+  
 .todoInput {
-  font-size: large;
+  border: 1px;
+  border-color: white;
 }
 
 .inputContainer {

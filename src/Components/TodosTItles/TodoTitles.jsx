@@ -3,8 +3,9 @@ import { LuListTodo } from "react-icons/lu";
 import { BiCheckCircle } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import TodoCard from "../TodoCard/TodoCard";
+import { useState } from "react";
 
-const TodoTitles = ({ titleStatus, data, onDrop, isEdit, setIsEdit }) => {
+const TodoTitles = ({ titleStatus, details, onDrop, isEdit, setIsEdit }) => {
   const statusIcons = {
     "To Do": <GiHamburgerMenu size={30} color="#8E7AD2" />,
     Doing: <LuListTodo size={30} color="#FE913E" />,
@@ -12,6 +13,8 @@ const TodoTitles = ({ titleStatus, data, onDrop, isEdit, setIsEdit }) => {
   };
 
   const statusIcon = statusIcons[titleStatus];
+
+  const [cardData, setCardData] = useState(null);
 
   const handleDrop = (event) => {
     event.preventDefault();
@@ -34,7 +37,8 @@ const TodoTitles = ({ titleStatus, data, onDrop, isEdit, setIsEdit }) => {
     event.preventDefault();
   };
 
-  const handleEditClick = (cardIndex) => {
+  const handleEditClick = (todo, cardIndex) => {
+    setCardData(todo);
     setIsEdit(cardIndex);
   };
 
@@ -54,7 +58,7 @@ const TodoTitles = ({ titleStatus, data, onDrop, isEdit, setIsEdit }) => {
       </div>
 
       {/* Render "To Do" tasks */}
-      {data.map((todo, index) => (
+      {details.map((todo, index) => (
         <TodoCard
           key={index}
           titleStatus={titleStatus}
@@ -65,9 +69,13 @@ const TodoTitles = ({ titleStatus, data, onDrop, isEdit, setIsEdit }) => {
           importanceValue={todo.importance}
           isEdit={index === isEdit}
           setIsEdit={
-            index === isEdit ? handleSaveClick : () => handleEditClick(index)
+            index === isEdit
+              ? handleSaveClick
+              : () => handleEditClick(todo, index)
           }
           cardIndex={index}
+          data={cardData}
+          setData={setCardData}
         />
       ))}
     </div>
