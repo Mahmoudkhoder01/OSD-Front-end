@@ -34,6 +34,14 @@ const TodoTitles = ({ titleStatus, data, onDrop, isEdit, setIsEdit }) => {
     event.preventDefault();
   };
 
+  const handleEditClick = (cardIndex) => {
+    setIsEdit(cardIndex);
+  };
+
+  const handleSaveClick = (cardIndex) => {
+    setIsEdit(null);
+  };
+
   return (
     <div
       className={classes.todoWrapper}
@@ -55,8 +63,10 @@ const TodoTitles = ({ titleStatus, data, onDrop, isEdit, setIsEdit }) => {
           dueDateValue={todo.dueDate}
           estimateValue={todo.estimate}
           importanceValue={todo.importance}
-          isEdit={isEdit}
-          setIsEdit={setIsEdit}
+          isEdit={index === isEdit}
+          setIsEdit={
+            index === isEdit ? handleSaveClick : () => handleEditClick(index)
+          }
           cardIndex={index}
         />
       ))}

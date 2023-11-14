@@ -33,16 +33,12 @@ const TodoCard = ({
     borderRadius: "5px",
   };
 
-  const [saveClicked, setSaveClicked] = useState(null);
-
   const handleEditClick = () => {
-    setIsEdit(!isEdit);
-    setSaveClicked(cardIndex);
+    setIsEdit(cardIndex);
   };
 
   const handleSaveClick = () => {
-    setIsEdit(false);
-    setSaveClicked(null);
+    setIsEdit(null);
   };
 
   return (
@@ -52,11 +48,11 @@ const TodoCard = ({
           type="text"
           value={todoTitle}
           className={classes.todoInput}
-          readOnly
+          readOnly={!isEdit} // Make the input read-only when not in edit mode
         />
         <div className={classes.editMode}>
           <FiEdit2 color="white" size={20} onClick={handleEditClick} />
-          {isEdit && cardIndex === saveClicked && (
+          {isEdit && (
             <FaSave color="white" size={20} onClick={handleSaveClick} />
           )}
         </div>

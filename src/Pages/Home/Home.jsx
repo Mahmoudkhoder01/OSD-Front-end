@@ -13,7 +13,9 @@ const Home = () => {
     importance: "",
   });
 
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEditToDo, setIsEditToDo] = useState(null);
+  const [isEditDoing, setIsEditDoing] = useState(null);
+  const [isEditDone, setIsEditDone] = useState(null);
 
   const [toDoData, setToDoData] = useState([
     {
@@ -47,9 +49,31 @@ const Home = () => {
       estimate: "8 hours",
       importance: "High",
     },
+    {
+      title: "Prepare the dddd",
+      category: "Email",
+      dueDate: "2023-01-14",
+      estimate: "8 hours",
+      importance: "High",
+    },
   ]);
 
-  const [doneData, setDoneData] = useState([]);
+  const [doneData, setDoneData] = useState([
+    {
+      title: "Prepare the dddd",
+      category: "Email",
+      dueDate: "2023-01-14",
+      estimate: "8 hours",
+      importance: "High",
+    },
+    {
+      title: "Prepare the dddd",
+      category: "Email",
+      dueDate: "2023-01-14",
+      estimate: "8 hours",
+      importance: "High",
+    },
+  ]);
 
   const handleDrop = (draggedData, targetStatus) => {
     if (targetStatus === "To Do") {
@@ -72,8 +96,8 @@ const Home = () => {
             data={toDoData}
             setData={setToDoData}
             onDrop={(draggedData) => handleDrop(draggedData, "To Do")}
-            isEdit={isEdit}
-            setIsEdit={setIsEdit}
+            isEdit={isEditToDo}
+            setIsEdit={(cardIndex) => setIsEditToDo(cardIndex)}
           />
 
           <TodoTitles
@@ -81,8 +105,8 @@ const Home = () => {
             data={doingData}
             setData={setDoingData}
             onDrop={(draggedData) => handleDrop(draggedData, "Doing")}
-            isEdit={isEdit}
-            setIsEdit={setIsEdit}
+            isEdit={isEditDoing}
+            setIsEdit={(cardIndex) => setIsEditDoing(cardIndex)}
           />
 
           <TodoTitles
@@ -90,8 +114,8 @@ const Home = () => {
             data={doneData}
             setData={setDoneData}
             onDrop={(draggedData) => handleDrop(draggedData, "Done")}
-            isEdit={isEdit}
-            setIsEdit={setIsEdit}
+            isEdit={isEditDone}
+            setIsEdit={(cardIndex) => setIsEditDone(cardIndex)}
           />
         </div>
       </div>
