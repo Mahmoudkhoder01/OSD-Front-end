@@ -20,8 +20,6 @@ const TodoTitles = ({
     Done: <BiCheckCircle size={30} color="#39AC95" />,
   };
 
-  console.log("TodoTitles - isCreate:", isCreate);
-
   const statusIcon = statusIcons[titleStatus];
 
   const [cardData, setCardData] = useState({

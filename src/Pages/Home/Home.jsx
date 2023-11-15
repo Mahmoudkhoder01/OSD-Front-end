@@ -80,7 +80,7 @@ const Home = () => {
       setDoneData((prevData) => [...prevData, draggedData]);
     }
   };
-console.log("homeeeeeeee", isCreate);
+
   return (
     <div className={classes.homePge}>
       <Nav setIsCreate={setIsCreate} isCreate={isCreate} />

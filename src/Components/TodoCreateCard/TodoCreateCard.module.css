@@ -1,79 +1,91 @@
 .cardWrapper {
-    padding: 10px 20px 10px 10px;
-    user-select: none;
-  }
-  
-  .cardWrapper,
-  .status {
-    background-color: #212529;
-    border-radius: 8px;
-  }
-  
-  .cardWrapper h4 {
-    color: white;
-  }
-  
-  .titleAndIcon {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .titleAndIcon .editMode {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    cursor: pointer;
-  }
-  
-  .cardWrapper:hover .titleAndIcon .editMode {
-    opacity: 1;
-  }
-  
-  .todoTitle {
-    color: white;
-    font-size: 1.2rem;
-  }
-  
-  .todoInput {
-    border: 1px solid white;
-    border-color: white;
-    background-color: #212529;
-    color: white;
-    padding: 4px 4px;
-  }
-  
-  .inputContainer {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .detailsInput {
-    color: white;
-    background-color: #212529;
-    border: 0;
-    outline: 0;
-  }
-  
-  .labelTodo {
-    color: #51585f;
-    width: 80px;
-  }
-  
-  .inputDetails {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    gap: 35px;
-  }
-  
-  .value {
-    color: white;
-  }
-  
-  .editMode {
-    display: flex;
-    gap: 15px;
-  }
-  
+  padding: 10px 20px 10px 10px;
+  user-select: none;
+}
+
+.cardWrapper,
+.status {
+  background-color: #212529;
+  border-radius: 8px;
+}
+
+.cardWrapper h4 {
+  color: white;
+}
+
+.titleAndIcon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleAndIcon div {
+  display: flex;
+  gap: 5px;
+}
+
+.titleAndIcon .editMode {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.cardWrapper:hover .titleAndIcon .editMode {
+  opacity: 1;
+}
+
+.todoTitle {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.todoInput {
+  border: 1px solid white;
+  border-color: white;
+  background-color: #212529;
+  color: white;
+  padding: 4px 4px;
+}
+
+.inputContainer {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detailsInput {
+  color: white;
+  background-color: #212529;
+  border: 0;
+  outline: 0;
+}
+
+.labelTodo {
+  color: #51585f;
+  width: 80px;
+}
+
+.inputDetails {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 35px;
+}
+
+.value {
+  color: white;
+}
+
+.saveIcon {
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.cardWrapper input {
+  max-width: 100px;
+}
