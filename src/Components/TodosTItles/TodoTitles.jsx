@@ -4,8 +4,16 @@ import { BiCheckCircle } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import TodoCard from "../TodoCard/TodoCard";
 import { useState } from "react";
+import TodoCreateCard from "../TodoCreateCard/TodoCreateCard";
 
-const TodoTitles = ({ titleStatus, details, onDrop, isEdit, setIsEdit }) => {
+const TodoTitles = ({
+  titleStatus,
+  details,
+  onDrop,
+  isEdit,
+  setIsEdit,
+  isCreate,
+}) => {
   const statusIcons = {
     "To Do": <GiHamburgerMenu size={30} color="#8E7AD2" />,
     Doing: <LuListTodo size={30} color="#FE913E" />,
@@ -14,7 +22,13 @@ const TodoTitles = ({ titleStatus, details, onDrop, isEdit, setIsEdit }) => {
 
   const statusIcon = statusIcons[titleStatus];
 
-  const [cardData, setCardData] = useState(null);
+  const [cardData, setCardData] = useState({
+    title: "",
+    category: "",
+    dueDate: "",
+    estimate: "",
+    importance: "",
+  });
 
   const handleDrop = (event) => {
     event.preventDefault();
@@ -56,6 +70,10 @@ const TodoTitles = ({ titleStatus, details, onDrop, isEdit, setIsEdit }) => {
         {statusIcon}
         {titleStatus}
       </div>
+
+      {isCreate && (
+        <TodoCreateCard data={cardData} setData={setCardData} isCreate={isCreate} />
+      )}
 
       {/* Render "To Do" tasks */}
       {details.map((todo, index) => (

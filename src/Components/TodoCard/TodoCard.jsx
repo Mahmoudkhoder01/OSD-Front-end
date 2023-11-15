@@ -1,7 +1,7 @@
 import classes from "./TodoCard.module.css";
 import { FiEdit2 } from "react-icons/fi";
 import { FaSave } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect } from "react";
 
 const TodoCard = ({
   todoTitle,
@@ -39,6 +39,19 @@ const TodoCard = ({
     setIsEdit(cardIndex);
   };
 
+  useEffect(() => {
+    if (isEdit) {
+      // Initialize localData with empty values when in create mode
+      setData({
+        title: data.title,
+        category: data.category,
+        dueDate: data.dueDate,
+        estimate: data.estimate,
+        importance: data.importance,
+      });
+    }
+  }, [isEdit]);
+
   const handleSaveClick = () => {
     setData({
       title: data.title,
@@ -55,6 +68,7 @@ const TodoCard = ({
       ...prevTodo,
       [field]: value,
     }));
+    return;
   };
 
   return (

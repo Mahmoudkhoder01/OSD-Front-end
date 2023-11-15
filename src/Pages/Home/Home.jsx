@@ -5,8 +5,12 @@ import TodoTitles from "../../Components/TodosTItles/TodoTitles";
 import classes from "./Home.module.css";
 
 const Home = () => {
+  const [isCreate, setIsCreate] = useState(false);
+
   const [isEditToDo, setIsEditToDo] = useState(null);
+
   const [isEditDoing, setIsEditDoing] = useState(null);
+
   const [isEditDone, setIsEditDone] = useState(null);
 
   const [toDoData, setToDoData] = useState([
@@ -79,7 +83,7 @@ const Home = () => {
 
   return (
     <div className={classes.homePge}>
-      <Nav />
+      <Nav setIsCreate={setIsCreate} isCreate={isCreate} />
       <div>
         <Quote />
         <div style={{ display: "flex" }}>
@@ -90,6 +94,7 @@ const Home = () => {
             onDrop={(draggedData) => handleDrop(draggedData, "To Do")}
             isEdit={isEditToDo}
             setIsEdit={(cardIndex) => setIsEditToDo(cardIndex)}
+            isCreate={isCreate}
           />
 
           <TodoTitles
