@@ -25,6 +25,11 @@
   cursor: pointer;
 }
 
+.titleAndIcon div{
+  display: flex;
+  gap: 5px;
+}
+
 .cardWrapper:hover .titleAndIcon .editMode {
   opacity: 1;
 }
@@ -75,4 +80,9 @@
 .editMode {
   display: flex;
   gap: 15px;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
 }
