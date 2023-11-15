@@ -132,6 +132,10 @@ const TodoCreateCard = () => {
         }));
         errorFields.push("Importance");
       }
+
+      if (errorFields.length > 0) {
+        return;
+      }
     } catch (error) {}
   };
 
