@@ -13,6 +13,10 @@ const TodoTitles = ({
   isEdit,
   setIsEdit,
   isCreate,
+  reFetch,
+  setIsCreate,
+  isLoading,
+  setIsLoading,
 }) => {
   const statusIcons = {
     "To Do": <GiHamburgerMenu size={30} color="#8E7AD2" />,
@@ -23,11 +27,13 @@ const TodoTitles = ({
   const statusIcon = statusIcons[titleStatus];
 
   const [cardData, setCardData] = useState({
+    id: "",
     title: "",
     category: "",
     dueDate: "",
     estimate: "",
     importance: "",
+    status: "",
   });
 
   const handleDrop = (event) => {
@@ -52,7 +58,15 @@ const TodoTitles = ({
   };
 
   const handleEditClick = (todo, cardIndex) => {
-    setCardData(todo);
+    setCardData({
+      id: todo.id,
+      title: todo.title,
+      category: todo.category,
+      dueDate: todo.dueDate,
+      estimate: todo.estimate,
+      importance: todo.importance,
+      status: todo.status,
+    });
     setIsEdit(cardIndex);
   };
 
@@ -72,7 +86,12 @@ const TodoTitles = ({
       </div>
 
       {isCreate && (
-        <TodoCreateCard data={cardData} setData={setCardData} isCreate={isCreate} />
+        <TodoCreateCard
+          setIsCreate={setIsCreate}
+          reFetch={reFetch}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
       )}
 
       {/* Render "To Do" tasks */}
@@ -94,6 +113,9 @@ const TodoTitles = ({
           cardIndex={index}
           data={cardData}
           setData={setCardData}
+          reFetch={reFetch}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
       ))}
     </div>

@@ -1,10 +1,19 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Nav from "../../Components/Nav/Nav";
+import Profile from "../../Components/Profile/Profile";
 import Quote from "../../Components/Quote/Quote";
+import { Loading } from "../../Components/ReusableTools/Loading/Loading";
 import TodoTitles from "../../Components/TodosTItles/TodoTitles";
 import classes from "./Home.module.css";
 
 const Home = () => {
+  const storedUser = localStorage.getItem("user");
+
+  const userInfo = JSON.parse(storedUser);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const [isCreate, setIsCreate] = useState(false);
 
   const [isEditToDo, setIsEditToDo] = useState(null);
@@ -13,63 +22,31 @@ const Home = () => {
 
   const [isEditDone, setIsEditDone] = useState(null);
 
-  const [toDoData, setToDoData] = useState([
-    {
-      title: "Prepare the assay",
-      category: "Email",
-      dueDate: "2023-01-14",
-      estimate: "8 hours",
-      importance: "High",
-    },
-    {
-      title: "Prepare the assay",
-      category: "Email",
-      dueDate: "2023-01-14",
-      estimate: "8 hours",
-      importance: "High",
-    },
-    {
-      title: "Prepare the assay",
-      category: "Email",
-      dueDate: "2023-01-14",
-      estimate: "8 hours",
-      importance: "High",
-    },
-  ]);
+  const [toDoData, setToDoData] = useState([]);
 
-  const [doingData, setDoingData] = useState([
-    {
-      title: "Prepare the dddd",
-      category: "Email",
-      dueDate: "2023-01-14",
-      estimate: "8 hours",
-      importance: "High",
-    },
-    {
-      title: "Prepare the dddd",
-      category: "Email",
-      dueDate: "2023-01-14",
-      estimate: "8 hours",
-      importance: "High",
-    },
-  ]);
+  const [doingData, setDoingData] = useState([]);
 
-  const [doneData, setDoneData] = useState([
-    {
-      title: "Prepare the dddd",
-      category: "Email",
-      dueDate: "2023-01-14",
-      estimate: "8 hours",
-      importance: "High",
-    },
-    {
-      title: "Prepare the dddd",
-      category: "Email",
-      dueDate: "2023-01-14",
-      estimate: "8 hours",
-      importance: "High",
-    },
-  ]);
+  const [doneData, setDoneData] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const resp = await axios.get(
+        `https://localhost:7054/api/Todo/${userInfo.id}`
+      );
+
+      setToDoData(resp.data.todosTodo);
+     
+      setDoingData(resp.data.todosDoing);
+     
+      setDoneData(resp.data.todosDone);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleDrop = (draggedData, targetStatus) => {
     if (targetStatus === "To Do") {
@@ -80,6 +57,10 @@ const Home = () => {
       setDoneData((prevData) => [...prevData, draggedData]);
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className={classes.homePge}>
@@ -95,6 +76,10 @@ const Home = () => {
             isEdit={isEditToDo}
             setIsEdit={(cardIndex) => setIsEditToDo(cardIndex)}
             isCreate={isCreate}
+            reFetch={fetchData}
+            setIsCreate={setIsCreate}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
 
           <TodoTitles
@@ -104,6 +89,9 @@ const Home = () => {
             onDrop={(draggedData) => handleDrop(draggedData, "Doing")}
             isEdit={isEditDoing}
             setIsEdit={(cardIndex) => setIsEditDoing(cardIndex)}
+            reFetch={fetchData}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
 
           <TodoTitles
@@ -113,6 +101,9 @@ const Home = () => {
             onDrop={(draggedData) => handleDrop(draggedData, "Done")}
             isEdit={isEditDone}
             setIsEdit={(cardIndex) => setIsEditDone(cardIndex)}
+            reFetch={fetchData}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
         </div>
       </div>

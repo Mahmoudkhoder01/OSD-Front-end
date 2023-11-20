@@ -18,14 +18,22 @@ nav {
   height: 50px !important;
   width: 50px;
   border-radius: 25px;
+  cursor: pointer;
 }
 
 .icon {
   color: white;
+  cursor: pointer;
 }
 
 .endNav {
   display: flex;
   align-items: center;
   gap: 25px;
+}
+
+.profileWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }

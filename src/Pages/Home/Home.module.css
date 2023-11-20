@@ -29,3 +29,9 @@
   background-color: #212529;
   border-radius: 8px;
 }
+
+.infoIcon {
+  position: absolute;
+  right: 0;
+  top: 5rem;
+}

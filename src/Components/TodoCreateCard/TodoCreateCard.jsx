@@ -1,8 +1,14 @@
 import { useState } from "react";
 import classes from "./TodoCreateCard.module.css";
 import { FaSave } from "react-icons/fa";
+import axios from "axios";
+import { AiOutlineClose } from "react-icons/ai";
 
-const TodoCreateCard = () => {
+const TodoCreateCard = ({ reFetch, setIsCreate, setIsLoading }) => {
+  const storedUser = localStorage.getItem("user");
+
+  const userInfo = JSON.parse(storedUser);
+
   const [data, setData] = useState({
     title: "",
     category: "",
@@ -33,7 +39,7 @@ const TodoCreateCard = () => {
     }));
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     try {
       if (
         !data.title &&
@@ -136,7 +142,29 @@ const TodoCreateCard = () => {
       if (errorFields.length > 0) {
         return;
       }
-    } catch (error) {}
+
+      setIsLoading(true);
+
+      const requestData = {
+        title: data.title,
+        category: data.category,
+        dueDate: data.dueDate,
+        estimate: data.estimate,
+        importance: data.importance,
+        status: "Todo",
+        userId: userInfo.id,
+      };
+
+      await axios.post("https://localhost:7054/api/Todo", requestData);
+
+      setIsCreate(false);
+
+      reFetch();
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log("create todo error", error.message);
+    }
   };
 
   return (
@@ -151,67 +179,80 @@ const TodoCreateCard = () => {
           />
           {error.title && <div className={classes.error}>{error.title}</div>}
         </div>
-        <FaSave
-          color="white"
-          size={20}
-          onClick={handleSaveClick}
-          className={classes.saveIcon}
-        />
+        <span>
+          <AiOutlineClose
+            color="white"
+            size={20}
+            className={classes.icon}
+            onClick={() => setIsCreate(false)}
+          />
+          <FaSave
+            color="white"
+            size={20}
+            onClick={handleSaveClick}
+            className={classes.icon}
+          />
+        </span>
       </div>
       <div className={classes.inputContainer}>
         <div className={classes.inputDetails}>
           <label className={classes.labelTodo}>Category</label>
-          <input
-            type="text"
-            value={data.category}
-            className={classes.todoInput}
-            onChange={(e) => handleInputChange("category", e.target.value)}
-          />
-          {error.category && (
-            <div className={classes.error}>{error.category}</div>
-          )}
+          <div>
+            <input
+              type="text"
+              value={data.category}
+              className={classes.todoInput}
+              onChange={(e) => handleInputChange("category", e.target.value)}
+            />
+            {error.category && (
+              <div className={classes.error}>{error.category}</div>
+            )}
+          </div>
         </div>
         <div className={classes.inputDetails}>
           <label className={classes.labelTodo}>Due date</label>
-
-          <input
-            type="date"
-            value={data.dueDate}
-            className={classes.todoInput}
-            onChange={(e) => handleInputChange("dueDate", e.target.value)}
-          />
-          {error.dueDate && (
-            <div className={classes.error}>{error.dueDate}</div>
-          )}
+          <div>
+            <input
+              type="date"
+              value={data.dueDate}
+              className={classes.todoInput}
+              onChange={(e) => handleInputChange("dueDate", e.target.value)}
+            />
+            {error.dueDate && (
+              <div className={classes.error}>{error.dueDate}</div>
+            )}
+          </div>
         </div>
         <div className={classes.inputDetails}>
           <label className={classes.labelTodo}>Estimate</label>
-
-          <input
-            type="text"
-            value={data.estimate}
-            className={classes.todoInput}
-            onChange={(e) => handleInputChange("estimate", e.target.value)}
-          />
-          {error.estimate && (
-            <div className={classes.error}>{error.estimate}</div>
-          )}
+          <div>
+            <input
+              type="text"
+              value={data.estimate}
+              className={classes.todoInput}
+              onChange={(e) => handleInputChange("estimate", e.target.value)}
+            />
+            {error.estimate && (
+              <div className={classes.error}>{error.estimate}</div>
+            )}
+          </div>
         </div>
         <div className={classes.inputDetails}>
           <label className={classes.labelTodo}>Importance</label>
-
-          <select
-            value={data.importance}
-            onChange={(e) => handleInputChange("importance", e.target.value)}
-          >
-            <option value="">Select an option</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-          {error.importance && (
-            <div className={classes.error}>{error.importance}</div>
-          )}
+          <div>
+            <select
+              value={data.importance}
+              onChange={(e) => handleInputChange("importance", e.target.value)}
+            >
+              <option value="">Select an option</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            {error.importance && (
+              <div className={classes.error}>{error.importance}</div>
+            )}
+          </div>
         </div>
       </div>
       {error.general && <div className={classes.error}>{error.general}</div>}

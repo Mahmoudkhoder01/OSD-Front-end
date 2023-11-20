@@ -1,3 +1,6 @@
+@import url("../../Components/ReusableTools/Variables.css");
+
+
 .cardWrapper {
   padding: 10px 20px 10px 10px;
   user-select: none;
@@ -15,12 +18,12 @@
 
 .titleAndIcon {
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
 .titleAndIcon div {
   display: flex;
+  flex-direction: column;
   gap: 5px;
 }
 
@@ -40,9 +43,10 @@
 }
 
 .todoInput {
-  border: 1px solid white;
-  border-color: white;
+  border: none;
+  border-bottom: 1px solid white;
   background-color: #212529;
+  outline: 0;
   color: white;
   padding: 4px 4px;
 }
@@ -73,12 +77,22 @@
   gap: 35px;
 }
 
+.inputDetails div{
+  display: flex;
+  flex-direction: column;
+}
+
 .value {
   color: white;
 }
 
-.saveIcon {
+.icon {
   cursor: pointer;
+  margin-left: 10px;
+}
+
+span{
+  display: flex;
 }
 
 .error {
@@ -87,5 +101,12 @@
 }
 
 .cardWrapper input {
-  max-width: 100px;
+  max-width: 120px;
+}
+
+select{
+  background-color: #212529;
+  border: 0;
+  outline: 0;
+  color: white;
 }

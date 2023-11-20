@@ -2,6 +2,8 @@ import classes from "./TodoCard.module.css";
 import { FiEdit2 } from "react-icons/fi";
 import { FaSave } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import axios from "axios";
 
 const TodoCard = ({
   todoTitle,
@@ -14,7 +16,13 @@ const TodoCard = ({
   cardIndex,
   data,
   setData,
+  reFetch,
+  setIsLoading,
 }) => {
+  const storedUser = localStorage.getItem("user");
+
+  const userInfo = JSON.parse(storedUser);
+
   const getImportanceColor = (importportance) => {
     if (importportance === "High") {
       return "#DC3545";
@@ -52,16 +60,18 @@ const TodoCard = ({
     if (isEdit) {
       // Initialize localData with empty values when in create mode
       setData({
+        id: data.id,
         title: data.title,
         category: data.category,
         dueDate: data.dueDate,
         estimate: data.estimate,
         importance: data.importance,
+        status: data.status,
       });
     }
   }, [isEdit]);
-  console.log(data.title);
-  const handleSaveClick = () => {
+
+  const handleSaveClick = async () => {
     try {
       if (
         !data.title &&
@@ -165,8 +175,29 @@ const TodoCard = ({
         return;
       }
 
+      setIsLoading(true);
+
+      const requestData = {
+        id: data.id,
+        title: data.title,
+        category: data.category,
+        dueDate: data.dueDate,
+        estimate: data.estimate,
+        importance: data.importance,
+        status: data.status,
+        userId: userInfo.id,
+      };
+
+      await axios.put("https://localhost:7054/api/Todo", requestData);
+
       setIsEdit(null);
-    } catch (error) {}
+
+      reFetch();
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const handleInputChange = (field, value) => {
@@ -194,9 +225,17 @@ const TodoCard = ({
           </div>
         )}
         <div className={classes.editMode}>
-          <FiEdit2 color="white" size={20} onClick={handleEditClick} />
-          {isEdit && (
-            <FaSave color="white" size={20} onClick={handleSaveClick} />
+          {!isEdit ? (
+            <FiEdit2 color="white" size={20} onClick={handleEditClick} />
+          ) : (
+            <div>
+              <AiOutlineClose
+                color="white"
+                size={20}
+                onClick={handleEditClick}
+              />
+              <FaSave color="white" size={20} onClick={handleSaveClick} />
+            </div>
           )}
         </div>
       </div>
@@ -206,7 +245,7 @@ const TodoCard = ({
           {!isEdit ? (
             <div className={classes.value}>{categoryValue}</div>
           ) : (
-            <>
+            <div className={classes.inputWithError}>
               <input
                 type="text"
                 value={data.category}
@@ -216,25 +255,25 @@ const TodoCard = ({
               {error.category && (
                 <div className={classes.error}>{error.category}</div>
               )}
-            </>
+            </div>
           )}
         </div>
         <div className={classes.inputDetails}>
           <label className={classes.labelTodo}>Due date</label>
           {!isEdit ? (
-            <div className={classes.value}>{dueDateValue}</div>
+            <div className={classes.value}>{dueDateValue.split("T")[0]}</div>
           ) : (
-            <>
+            <div className={classes.inputWithError}>
               <input
                 type="date"
-                value={data.dueDate}
+                value={data.dueDate.split("T")[0]}
                 className={classes.todoInput}
                 onChange={(e) => handleInputChange("dueDate", e.target.value)}
               />
               {error.dueDate && (
                 <div className={classes.error}>{error.dueDate}</div>
               )}
-            </>
+            </div>
           )}
         </div>
         <div className={classes.inputDetails}>
@@ -242,7 +281,7 @@ const TodoCard = ({
           {!isEdit ? (
             <div className={classes.value}>{estimateValue}</div>
           ) : (
-            <>
+            <div className={classes.inputWithError}>
               <input
                 type="text"
                 value={data.estimate}
@@ -252,7 +291,7 @@ const TodoCard = ({
               {error.estimate && (
                 <div className={classes.error}>{error.estimate}</div>
               )}
-            </>
+            </div>
           )}
         </div>
         <div className={classes.inputDetails}>
@@ -262,7 +301,7 @@ const TodoCard = ({
               {importanceValue}
             </div>
           ) : (
-            <>
+            <div className={classes.inputWithError}>
               <select
                 value={data.importance}
                 onChange={(e) =>
@@ -277,7 +316,7 @@ const TodoCard = ({
               {error.importance && (
                 <div className={classes.error}>{error.importance}</div>
               )}
-            </>
+            </div>
           )}
         </div>
       </div>
