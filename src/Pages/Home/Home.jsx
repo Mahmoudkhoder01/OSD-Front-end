@@ -15,6 +15,8 @@ const Home = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [isShowProfile, setIsShowProfile] = useState(false);
+
   const [isQuote, setIsQuote] = useState(true);
 
   const [isCreate, setIsCreate] = useState(false);
@@ -30,6 +32,8 @@ const Home = () => {
   const [doingData, setDoingData] = useState([]);
 
   const [doneData, setDoneData] = useState([]);
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchData = async () => {
     try {
@@ -75,9 +79,38 @@ const Home = () => {
     return <Loading />;
   }
 
+  const handleSearchInputChange = (event) => {
+    const searchTerm = event.target.value;
+    setSearchTerm(searchTerm);
+
+    // // Apply filtering based on search term
+    // filterData(toDoData, setToDoData, searchTerm);
+    // filterData(doingData, setDoingData, searchTerm);
+    // filterData(doneData, setDoneData, searchTerm);
+  };
+
+  // const filterData = (data, setFilteredData, searchTerm) => {
+  //   if (searchTerm.trim() !== "") {
+  //     const filteredResults = data.filter((item) =>
+  //       item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //     setToDoData(filteredResults);
+  //     setDoingData(filteredResults);
+  //     setDoneData(filteredResults);
+  //   }
+  // };
+
   return (
     <div className={classes.homePge}>
-      <Nav setIsCreate={setIsCreate} isCreate={isCreate} />
+      <Nav
+        setIsCreate={setIsCreate}
+        isCreate={isCreate}
+        searchTerm={searchTerm}
+        handleInputChange={handleSearchInputChange}
+        isShow={isShowProfile}
+        setIsShow={setIsShowProfile}
+      />
+      {isShowProfile && <Profile />}
       <div>
         {isQuote && <Quote setIsQuote={setIsQuote} />}
         <div className={classes.container}>
