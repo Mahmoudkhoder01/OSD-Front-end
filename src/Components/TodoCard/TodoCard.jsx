@@ -18,6 +18,7 @@ const TodoCard = ({
   setData,
   reFetch,
   setIsLoading,
+  onDragStart,
 }) => {
   const storedUser = localStorage.getItem("user");
 
@@ -209,7 +210,7 @@ const TodoCard = ({
   };
 
   return (
-    <div className={classes.cardWrapper} draggable>
+    <div className={classes.cardWrapper} draggable onDragStart={onDragStart}>
       <div className={classes.titleAndIcon}>
         {!isEdit ? (
           <div className={classes.todoTitle}>{todoTitle}</div>

@@ -51,13 +51,21 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const handleDrop = (draggedData, targetStatus) => {
-    if (targetStatus === "To Do") {
-      setToDoData((prevData) => [...prevData, draggedData]);
-    } else if (targetStatus === "Doing") {
-      setDoingData((prevData) => [...prevData, draggedData]);
-    } else if (targetStatus === "Done") {
-      setDoneData((prevData) => [...prevData, draggedData]);
+  const handleDrop = async (draggedData, targetStatus) => {
+    try {
+      const resp = await axios.put(`https://localhost:7054/api/Todo`, {
+        id: draggedData.id,
+        title: draggedData.title,
+        category: draggedData.category,
+        dueDate: draggedData.dueDate,
+        estimate: draggedData.estimate,
+        importance: draggedData.importance,
+        status: targetStatus,
+      });
+
+      fetchData();
+    } catch (error) {
+      console.error("Error updating todo status:", error.message);
     }
   };
 

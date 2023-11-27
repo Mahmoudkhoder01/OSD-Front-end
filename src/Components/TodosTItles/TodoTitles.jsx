@@ -37,9 +37,25 @@ const TodoTitles = ({
     status: "",
   });
 
+  const handleDragStart = (event, todo) => {
+    // Set the dragged data based on the todo item
+    const dragData = {
+      id: todo.id,
+      title: todo.title,
+      category: todo.category,
+      dueDate: todo.dueDate,
+      estimate: todo.estimate,
+      importance: todo.importance,
+      status: todo.status,
+    };
+
+    // Set the data to be transferred during the drag operation
+    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  };
+
   const handleDrop = (event) => {
     event.preventDefault();
-
+    console.log("before dropped");
     // Get the dragged data from the event
     const draggedDataString = event.dataTransfer.getData("text/plain");
 
@@ -56,6 +72,7 @@ const TodoTitles = ({
 
   const handleDragOver = (event) => {
     event.preventDefault();
+    console.log("Drag over");
   };
 
   const handleEditClick = (todo, cardIndex) => {
@@ -78,12 +95,16 @@ const TodoTitles = ({
   return (
     <div
       className={classes.todoWrapper}
+      // onDragStart={(event) => handleDragStart(event, todo)}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
       <div
         className={classes.status}
-        style={{ top: isQuote ? "170px" : "120px", marginBottom: !isQuote && "20px" }}
+        style={{
+          top: isQuote ? "170px" : "120px",
+          marginBottom: !isQuote && "20px",
+        }}
       >
         {statusIcon}
         {titleStatus}
@@ -119,6 +140,7 @@ const TodoTitles = ({
           setData={setCardData}
           reFetch={reFetch}
           isLoading={isLoading}
+          onDragStart={(event) => handleDragStart(event, todo)}
           setIsLoading={setIsLoading}
         />
       ))}
