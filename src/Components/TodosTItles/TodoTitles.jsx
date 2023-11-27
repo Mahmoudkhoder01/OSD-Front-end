@@ -17,6 +17,7 @@ const TodoTitles = ({
   setIsCreate,
   isLoading,
   setIsLoading,
+  isQuote,
 }) => {
   const statusIcons = {
     "To Do": <GiHamburgerMenu size={30} color="#8E7AD2" />,
@@ -36,17 +37,30 @@ const TodoTitles = ({
     status: "",
   });
 
+  const handleDragStart = (event, todo) => {
+    // Set the dragged data based on the todo item
+    const dragData = {
+      id: todo.id,
+      title: todo.title,
+      category: todo.category,
+      dueDate: todo.dueDate,
+      estimate: todo.estimate,
+      importance: todo.importance,
+      status: todo.status,
+    };
+
+    // Set the data to be transferred during the drag operation
+    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  };
+
   const handleDrop = (event) => {
     event.preventDefault();
-
     // Get the dragged data from the event
     const draggedDataString = event.dataTransfer.getData("text/plain");
 
     // Check if the dragged data string is not empty
     if (draggedDataString) {
       const draggedData = JSON.parse(draggedDataString);
-
-      console.log("dropped");
 
       // Call the onDrop function with the dragged data and the title status
       onDrop(draggedData, titleStatus);
@@ -70,17 +84,24 @@ const TodoTitles = ({
     setIsEdit(cardIndex);
   };
 
-  const handleSaveClick = (cardIndex) => {
+  const handleSaveClick = () => {
     setIsEdit(null);
   };
 
   return (
     <div
       className={classes.todoWrapper}
+      // onDragStart={(event) => handleDragStart(event, todo)}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <div className={classes.status}>
+      <div
+        className={classes.status}
+        style={{
+          top: isQuote ? "170px" : "120px",
+          marginBottom: !isQuote && "20px",
+        }}
+      >
         {statusIcon}
         {titleStatus}
       </div>
@@ -115,6 +136,7 @@ const TodoTitles = ({
           setData={setCardData}
           reFetch={reFetch}
           isLoading={isLoading}
+          onDragStart={(event) => handleDragStart(event, todo)}
           setIsLoading={setIsLoading}
         />
       ))}

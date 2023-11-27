@@ -13,9 +13,8 @@
   font-weight: bold;
   font-size: 20px;
   gap: 10px;
-}
-
-.status {
+  position: sticky;
+  z-index: 1000;
   background-color: #212529;
   border-radius: 8px;
 }
