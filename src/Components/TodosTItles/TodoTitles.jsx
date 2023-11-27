@@ -55,15 +55,12 @@ const TodoTitles = ({
 
   const handleDrop = (event) => {
     event.preventDefault();
-    console.log("before dropped");
     // Get the dragged data from the event
     const draggedDataString = event.dataTransfer.getData("text/plain");
 
     // Check if the dragged data string is not empty
     if (draggedDataString) {
       const draggedData = JSON.parse(draggedDataString);
-
-      console.log("dropped");
 
       // Call the onDrop function with the dragged data and the title status
       onDrop(draggedData, titleStatus);
@@ -72,7 +69,6 @@ const TodoTitles = ({
 
   const handleDragOver = (event) => {
     event.preventDefault();
-    console.log("Drag over");
   };
 
   const handleEditClick = (todo, cardIndex) => {
@@ -88,7 +84,7 @@ const TodoTitles = ({
     setIsEdit(cardIndex);
   };
 
-  const handleSaveClick = (cardIndex) => {
+  const handleSaveClick = () => {
     setIsEdit(null);
   };
 
