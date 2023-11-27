@@ -17,6 +17,7 @@ const TodoTitles = ({
   setIsCreate,
   isLoading,
   setIsLoading,
+  isQuote,
 }) => {
   const statusIcons = {
     "To Do": <GiHamburgerMenu size={30} color="#8E7AD2" />,
@@ -80,7 +81,10 @@ const TodoTitles = ({
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <div className={classes.status}>
+      <div
+        className={classes.status}
+        style={{ top: isQuote ? "170px" : "120px", marginBottom: !isQuote && "20px" }}
+      >
         {statusIcon}
         {titleStatus}
       </div>

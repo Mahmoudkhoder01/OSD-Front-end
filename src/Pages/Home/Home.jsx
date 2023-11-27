@@ -84,6 +84,7 @@ const Home = () => {
               setIsCreate={setIsCreate}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
+              isQuote={isQuote}
             />
 
             <TodoTitles
@@ -96,6 +97,7 @@ const Home = () => {
               reFetch={fetchData}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
+              isQuote={isQuote}
             />
 
             <TodoTitles
@@ -108,6 +110,7 @@ const Home = () => {
               reFetch={fetchData}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
+              isQuote={isQuote}
             />
           </div>
           {!isQuote && (
@@ -116,6 +119,7 @@ const Home = () => {
               size={20}
               color="white"
               onClick={() => setIsQuote(!isQuote)}
+              style={{ top: !isQuote ? "120px" : "170px" }}
             />
           )}
         </div>

@@ -12,6 +12,9 @@
 .infoIcon {
   margin-top: 40px;
   cursor: pointer;
+  position: sticky;
+  top: 170px;
+  z-index: 1000;
 }
 
 .cardsWrapper {
@@ -24,18 +27,4 @@
   gap: 10px;
   width: 20%;
   margin: 30px 50px 0 20px;
-}
-
-.status {
-  padding: 10px 20px;
-  color: white;
-  display: flex;
-  font-weight: bold;
-  font-size: 20px;
-  gap: 10px;
-}
-
-.status {
-  background-color: #212529;
-  border-radius: 8px;
 }
