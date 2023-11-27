@@ -4,6 +4,16 @@
   padding-bottom: 40px;
 }
 
+.container {
+  display: flex;
+  padding-right: 30px;
+}
+
+.infoIcon {
+  margin-top: 40px;
+  cursor: pointer;
+}
+
 .cardsWrapper {
   display: flex;
 }
@@ -28,10 +38,4 @@
 .status {
   background-color: #212529;
   border-radius: 8px;
-}
-
-.infoIcon {
-  position: absolute;
-  right: 0;
-  top: 5rem;
 }

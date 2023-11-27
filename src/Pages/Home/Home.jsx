@@ -6,6 +6,7 @@ import Quote from "../../Components/Quote/Quote";
 import { Loading } from "../../Components/ReusableTools/Loading/Loading";
 import TodoTitles from "../../Components/TodosTItles/TodoTitles";
 import classes from "./Home.module.css";
+import { FaCircleInfo } from "react-icons/fa6";
 
 const Home = () => {
   const storedUser = localStorage.getItem("user");
@@ -13,6 +14,8 @@ const Home = () => {
   const userInfo = JSON.parse(storedUser);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isQuote, setIsQuote] = useState(true);
 
   const [isCreate, setIsCreate] = useState(false);
 
@@ -35,9 +38,9 @@ const Home = () => {
       );
 
       setToDoData(resp.data.todosTodo);
-     
+
       setDoingData(resp.data.todosDoing);
-     
+
       setDoneData(resp.data.todosDone);
     } catch (error) {
       console.log(error.message);
@@ -66,45 +69,55 @@ const Home = () => {
     <div className={classes.homePge}>
       <Nav setIsCreate={setIsCreate} isCreate={isCreate} />
       <div>
-        <Quote />
-        <div style={{ display: "flex" }}>
-          <TodoTitles
-            titleStatus="To Do"
-            details={toDoData}
-            setDetailsData={setToDoData}
-            onDrop={(draggedData) => handleDrop(draggedData, "To Do")}
-            isEdit={isEditToDo}
-            setIsEdit={(cardIndex) => setIsEditToDo(cardIndex)}
-            isCreate={isCreate}
-            reFetch={fetchData}
-            setIsCreate={setIsCreate}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-          />
+        {isQuote && <Quote setIsQuote={setIsQuote} />}
+        <div className={classes.container}>
+          <div style={{ display: "flex", flex: 1 }}>
+            <TodoTitles
+              titleStatus="To Do"
+              details={toDoData}
+              setDetailsData={setToDoData}
+              onDrop={(draggedData) => handleDrop(draggedData, "To Do")}
+              isEdit={isEditToDo}
+              setIsEdit={(cardIndex) => setIsEditToDo(cardIndex)}
+              isCreate={isCreate}
+              reFetch={fetchData}
+              setIsCreate={setIsCreate}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
 
-          <TodoTitles
-            titleStatus="Doing"
-            details={doingData}
-            setDetailsData={setDoingData}
-            onDrop={(draggedData) => handleDrop(draggedData, "Doing")}
-            isEdit={isEditDoing}
-            setIsEdit={(cardIndex) => setIsEditDoing(cardIndex)}
-            reFetch={fetchData}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-          />
+            <TodoTitles
+              titleStatus="Doing"
+              details={doingData}
+              setDetailsData={setDoingData}
+              onDrop={(draggedData) => handleDrop(draggedData, "Doing")}
+              isEdit={isEditDoing}
+              setIsEdit={(cardIndex) => setIsEditDoing(cardIndex)}
+              reFetch={fetchData}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
 
-          <TodoTitles
-            titleStatus="Done"
-            details={doneData}
-            setDetailsData={setDoneData}
-            onDrop={(draggedData) => handleDrop(draggedData, "Done")}
-            isEdit={isEditDone}
-            setIsEdit={(cardIndex) => setIsEditDone(cardIndex)}
-            reFetch={fetchData}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-          />
+            <TodoTitles
+              titleStatus="Done"
+              details={doneData}
+              setDetailsData={setDoneData}
+              onDrop={(draggedData) => handleDrop(draggedData, "Done")}
+              isEdit={isEditDone}
+              setIsEdit={(cardIndex) => setIsEditDone(cardIndex)}
+              reFetch={fetchData}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
+          </div>
+          {!isQuote && (
+            <FaCircleInfo
+              className={classes.infoIcon}
+              size={20}
+              color="white"
+              onClick={() => setIsQuote(!isQuote)}
+            />
+          )}
         </div>
       </div>
     </div>
